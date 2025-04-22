@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produto Processor - Sistema de Análise de Produtos</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            margin-top: 25px;
+            color: var(--secondary-color);
+        }
+        
+        .subtitle {
+            font-style: italic;
+            color: var(--light-color);
+        }
+        
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .method {
+            background-color: white;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .method-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            margin: -15px -15px 15px -15px;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .method-signature {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            color: var(--light-color);
+        }
+        
+        .method-description {
+            margin-bottom: 10px;
+        }
+        
+        .param {
+            margin-left: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .param-name {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .return {
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .example {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--secondary-color);
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .note {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .warning {
+            background-color: #ffebee;
+            border-left: 4px solid var(--accent-color);
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            flex: 1 1 300px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--secondary-color);
+        }
+        
+        .feature-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        
+        .graphics-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .graphic {
+            flex: 1 1 350px;
+            background-color: white;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .graphic img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 3px;
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Produto Processor</h1>
+        <p class="subtitle">Sistema Avançado de Análise e Processamento de Dados de Produtos e Serviços</p>
+    </header>
+    
+    <section>
+        <h2>Visão Geral</h2>
+        <p>
+            O <code>ProdutoProcessor</code> é uma classe Python projetada para processar, analisar e gerar relatórios sobre dados de produtos e serviços. 
+            Ele oferece funcionalidades completas desde o carregamento de dados até a geração de relatórios profissionais e visualizações gráficas.
+        </p>
+        
+        <div class="features">
+            <div class="feature-card">
+                <h3>Carregamento de Dados</h3>
+                <p>Valida e carrega dados de produtos a partir de arquivos Excel, com verificação de integridade e estrutura.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Cálculos Automáticos</h3>
+                <p>Realiza cálculos complexos como aplicação de impostos, margens de lucro e classificação por categorias.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Análise Estatística</h3>
+                <p>Gera estatísticas detalhadas sobre os produtos, incluindo médias, totais e distribuição por categorias.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Relatórios Profissionais</h3>
+                <p>Exporta dados para Excel com formatação profissional, incluindo múltiplas abas e estilos.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Visualização de Dados</h3>
+                <p>Cria gráficos e visualizações para melhor compreensão dos dados processados.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Logging Completo</h3>
+                <p>Registra todas as operações em arquivo de log e console para rastreamento e depuração.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <h2>Como Usar</h2>
+        
+        <div class="example">
+            <h3>Exemplo Básico de Uso</h3>
+            <pre><code># Importar a classe
+from produto_processor import ProdutoProcessor
+
+# Criar instância do processador
+processor = ProdutoProcessor("Produtos.xlsx")
+
+# Carregar e processar dados
+if processor.carregar_dados() and processor.processar_dados():
+    # Gerar relatório e gráficos
+    processor.gerar_relatorio("Relatorio_Produtos.xlsx")
+    processor.gerar_graficos("graficos/")</code></pre>
+        </div>
+        
+        <div class="note">
+            <p><strong>Nota:</strong> O arquivo de entrada deve conter pelo menos as colunas: <code>Produtos</code>, <code>Preço Base Original</code>, <code>Tipo</code> e <code>Multiplicador Imposto</code>.</p>
+        </div>
+    </section>
+    
+    <section>
+        <h2>Documentação da Classe</h2>
+        
+        <h3>Métodos Principais</h3>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-signature">__init__(arquivo_entrada: str)</div>
+            </div>
+            <div class="method-description">
+                Inicializa o processador com o arquivo de entrada.
+            </div>
+            <div class="param">
+                <span class="param-name">arquivo_entrada:</span> Caminho para o arquivo Excel contendo os dados de produtos.
+            </div>
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-signature">carregar_dados() -> bool</div>
+            </div>
+            <div class="method-description">
+                Carrega e valida os dados de entrada. Retorna True se bem-sucedido.
+            </div>
+            <div class="return">
+                <strong>Retorna:</strong> True se os dados foram carregados com sucesso, False caso contrário.
+            </div>
+            <div class="warning">
+                <p><strong>Validação:</strong> Verifica se o arquivo existe, se contém as colunas obrigatórias e se os valores numéricos são válidos.</p>
+            </div>
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-signature">processar_dados() -> bool</div>
+            </div>
+            <div class="method-description">
+                Processa os dados aplicando regras de negócio e cálculos. Retorna True se bem-sucedido.
+            </div>
+            <div class="return">
+                <strong>Retorna:</strong> True se o processamento foi concluído com sucesso, False caso contrário.
+            </div>
+            <div class="note">
+                <p>Este método realiza várias operações incluindo aplicação de impostos, cálculo de margem de lucro e classificação por categorias de preço.</p>
+            </div>
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-signature">gerar_relatorio(arquivo_saida: str) -> bool</div>
+            </div>
+            <div class="method-description">
+                Gera relatório completo em Excel com formatação profissional.
+            </div>
+            <div class="param">
+                <span class="param-name">arquivo_saida:</span> Caminho para o arquivo Excel de saída.
+            </div>
+            <div class="return">
+                <strong>Retorna:</strong> True se o relatório foi gerado com sucesso, False caso contrário.
+            </div>
+            <div class="note">
+                <p>O relatório inclui múltiplas abas com diferentes análises e é formatado automaticamente.</p>
+            </div>
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-signature">gerar_graficos(diretorio_saida: str = '.') -> Dict[str, str]</div>
+            </div>
+            <div class="method-description">
+                Gera gráficos de análise e retorna caminhos dos arquivos.
+            </div>
+            <div class="param">
+                <span class="param-name">diretorio_saida:</span> Diretório onde os gráficos serão salvos (padrão: diretório atual).
+            </div>
+            <div class="return">
+                <strong>Retorna:</strong> Dicionário com os caminhos dos arquivos de gráficos gerados.
+            </div>
+        </div>
+        
+        <h3>Métodos Internos</h3>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-signature">_aplicar_impostos() -> None</div>
+            </div>
+            <div class="method-description">
+                Aplica regras de impostos diferenciadas para produtos (12%) e serviços (50%).
+            </div>
+            <div class="warning">
+                <p>Tipos inválidos são registrados em log mas não interrompem o processamento.</p>
+            </div>
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-signature">_classificar_categorias_preco() -> None</div>
+            </div>
+            <div class="method-description">
+                Classifica produtos em categorias de preço: Baixo (0-100), Médio (100-500), Alto (500+).
+            </div>
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-signature">_calcular_estatisticas() -> None</div>
+            </div>
+            <div class="method-description">
+                Calcula estatísticas avançadas sobre os dados processados.
+            </div>
+            <div class="note">
+                <p>As estatísticas incluem totais, médias, valores extremos e análises por categoria.</p>
+            </div>
+        </div>
+        
+        <div class="method">
+            <div class="method-header">
+                <div class="method-signature">_formatar_excel(arquivo: str) -> None</div>
+            </div>
+            <div class="method-description">
+                Aplica formatação profissional ao arquivo Excel gerado.
+            </div>
+            <div class="note">
+                <p>Inclui formatação de cabeçalhos, ajuste de colunas e formatação numérica.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <h2>Exemplo de Saída</h2>
+        
+        <h3>Gráficos Gerados</h3>
+        
+        <div class="graphics-container">
+            <div class="graphic">
+                <h4>Distribuição de Produtos vs Serviços</h4>
+                <img src="https://via.placeholder.com/600x400/4F81BD/FFFFFF?text=Distribuição+de+Tipos" alt="Distribuição de Tipos">
+            </div>
+            
+            <div class="graphic">
+                <h4>Distribuição por Categoria de Preço</h4>
+                <img src="https://via.placeholder.com/600x400/3498db/FFFFFF?text=Categorias+de+Preço" alt="Categorias de Preço">
+            </div>
+            
+            <div class="graphic">
+                <h4>Distribuição de Preços por Tipo</h4>
+                <img src="https://via.placeholder.com/600x400/e74c3c/FFFFFF?text=Boxplot+de+Preços" alt="Boxplot de Preços">
+            </div>
+        </div>
+        
+        <h3>Exemplo de Estatísticas</h3>
+        <pre><code>{
+    'Total Produtos': 42,
+    'Total Serviços': 18,
+    'Preço Médio Produtos': 245.67,
+    'Preço Médio Serviços': 587.32,
+    'Valor Total Estoque': 18542.36,
+    'Produto Mais Caro': 'Serviço Premium',
+    'Preço Mais Alto': 1250.00,
+    'Produto Mais Barato': 'Pilha AAA',
+    'Preço Mais Baixo': 5.99,
+    'Margem Média (%)': 23.45
+}</code></pre>
+    </section>
+    
+    <section>
+        <h2>Requisitos</h2>
+        <ul>
+            <li>Python 3.7+</li>
+            <li>Pandas</li>
+            <li>NumPy</li>
+            <li>Matplotlib</li>
+            <li>Seaborn</li>
+            <li>OpenPyXL</li>
+        </ul>
+        
+        <div class="note">
+            <p>Instale os requisitos com: <code>pip install pandas numpy matplotlib seaborn openpyxl</code></p>
+        </div>
+    </section>
+    
+    <footer>
+        <p>Sistema ProdutoProcessor - &copy; 2025 | Desenvolvido para análise avançada de dados de produtos e serviços</p>
+    </footer>
+</body>
+</html>
